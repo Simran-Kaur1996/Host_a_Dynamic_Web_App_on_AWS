@@ -29,14 +29,14 @@ This project showcases how to build, deploy, and host a dynamic website on AWS. 
 - **RDS** for database management
 
 # 🔧 Technologies Used
-**AWS EC2**: For hosting the web application.
-**AWS VPC**: For creating a secure and isolated network.
-**AWS Auto** Scaling: For automatic scaling of EC2 instances.
-**AWS Application Load Balancer**: For distributing traffic across instances.
-**AWS RDS**: For database management.
-**AWS S3**: For storing static files.
-**AWS Route 53**: For DNS management.
-**AWS Certificate Manager**: For securing communications via SSL.
+-**AWS EC2**: For hosting the web application.
+-**AWS VPC**: For creating a secure and isolated network.
+-**AWS Auto** Scaling: For automatic scaling of EC2 instances.
+-**AWS Application Load Balancer**: For distributing traffic across instances.
+-**AWS RDS**: For database management.
+-**AWS S3**: For storing static files.
+-**AWS Route 53**: For DNS management.
+-**AWS Certificate Manager**: For securing communications via SSL.
 
 # 🏗️ Deployment Instructions
 Follow these steps to set up the project on AWS:
@@ -53,6 +53,61 @@ Upload the website files to an S3 bucket:
 
 ```bash
 aws s3 sync ./website-code/ s3://your-s3-bucket-name/
+```
+**4. Access the Website**
+Once all resources are provisioned, access the website via the domain name you configured in **Route 53**.
+Database Configuration
+Update the .env file with your RDS credentials:
+
+```bash
+
+S3_URI=s3://your-sql-files/website.sql
+RDS_ENDPOINT=your-rds-endpoint.amazonaws.com
+RDS_DB_NAME=applicationdb
+RDS_DB_USERNAME=your-username
+RDS_DB_PASSWORD=your-password
+```
+Run the database migration using **Flyway**:
+
+```bash
+flyway -url=jdbc:mysql://"$RDS_ENDPOINT":3306/"$RDS_DB_NAME" \
+  -user="$RDS_DB_USERNAME" \
+  -password="$RDS_DB_PASSWORD" \
+  -locations=filesystem:sql \
+  migrate
+```
+EC2 Instance Setup for Web Hosting
+To install the web server and application on an EC2 instance, use the following script:
+
+```bash
+# Update the system and install Apache web server
+sudo yum update -y
+sudo yum install -y httpd
+sudo systemctl enable httpd
+sudo systemctl start httpd
+
+# Install PHP and required extensions
+sudo dnf install -y php php-pdo php-openssl php-mbstring
+
+# Install MySQL Server
+sudo dnf install -y mysql-community-server
+sudo systemctl start mysqld
+sudo systemctl enable mysqld
+
+# Set environment variables for the S3 bucket and other configurations
+S3_BUCKET_NAME=your-s3-bucket-name
+
+# Sync application files from S3 to EC2
+sudo aws s3 sync s3://"$S3_BUCKET_NAME" /var/www/html
+
+# Set appropriate permissions
+sudo chmod -R 777 /var/www/html
+```
+Restart Apache to apply changes:
+
+```bash
+
+sudo service httpd restart
 ```
 
 ## How It Works:
