@@ -110,7 +110,7 @@ Restart Apache to apply changes:
 sudo service httpd restart
 ```
 
-## How It Works:
+# How It Works:
 - EC2 Instances: Host the dynamic website within private subnets, ensuring high availability and security.
 - Application Load Balancer (ALB): Distributes traffic to EC2 instances based on availability and traffic load.
 - Auto Scaling Group: Automatically adjusts the number of EC2 instances in response to traffic demand, ensuring consistent performance.
