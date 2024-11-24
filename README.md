@@ -1,5 +1,4 @@
 # Dynamic Website Hosting on AWS
-Showcase of Cloud Infrastructure, Automation, Scalability, and Security
 This project demonstrates the deployment and hosting of a dynamic website on Amazon Web Services (AWS), utilizing a robust, scalable, and highly available architecture. It highlights key aspects of cloud infrastructure, automation, security, and performance management.
 
 ![Project Diagram](project.png)
@@ -142,4 +141,6 @@ sudo service httpd restart
 **Problem 4: S3 sync fails**
 -Solution: Ensure the IAM user has sufficient permissions to access the S3 bucket and that the correct bucket name and path are used in the sync command.
 
+## Deployed Website 
+![Project Diagram](Deployed_Website_1.png)
     
