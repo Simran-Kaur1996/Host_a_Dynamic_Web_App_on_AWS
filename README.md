@@ -1,25 +1,20 @@
 # Dynamic Website Hosting on AWS
+Showcase of Cloud Infrastructure, Automation, Scalability, and Security
+This project demonstrates the deployment and hosting of a dynamic website on Amazon Web Services (AWS), utilizing a robust, scalable, and highly available architecture. It highlights key aspects of cloud infrastructure, automation, security, and performance management.
 
-This project demonstrates the deployment and hosting of a dynamic website on AWS, utilizing various services and components to ensure high availability, scalability, security, and fault tolerance.
+# *📦Project Overview
+This project showcases how to build, deploy, and host a dynamic website on AWS. The architecture is designed to ensure high availability, fault tolerance, scalability, and security using various AWS services, such as:
+
+- EC2 Instances for web hosting.
+- VPC with public and private subnets for network isolation.
+- Auto Scaling and Application Load Balancer (ALB) for dynamic scaling and traffic distribution.
+- SSL/TLS certificates for secure communication.
+- Route 53 for DNS management.
 
 ## Architecture Overview
 ![Project Diagram](3._Host_a_Dynamic_Web_App_on_AWS.gif)
 
-🌐 Dynamic Website Hosting on AWS
-This project showcases the deployment of a dynamic website on AWS, using a highly available, scalable, and secure architecture. It leverages key AWS services such as EC2, VPC, Auto Scaling, Application Load Balancer, RDS, and more to ensure the website's smooth operation and resilience.
-
-
-📦 Project Overview
-The dynamic website is hosted using Amazon Web Services (AWS), ensuring scalability, fault tolerance, and high availability. This infrastructure includes a multi-tier architecture with:
-
-EC2 instances for web hosting
-A VPC with public and private subnets
-Auto Scaling and Load Balancing for dynamic scaling
-Secure connections using SSL/TLS certificates
-Managed DNS via Route 53
-The website is fully automated for deployment and includes detailed deployment scripts and reference diagrams.
-
-⚙️ Architecture Diagram
+# *⚙️ Architecture Diagram
 
 Virtual Private Cloud (VPC) with Public and Private Subnets
 Internet Gateway to allow internet access
