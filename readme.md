@@ -104,7 +104,5 @@ Solution: I created a script to automatically install necessary software (Apache
 5. Challenge: SSL Certificate Installation Failures
 Issue: There were issues with installing and configuring the SSL/TLS certificates for secure HTTPS communication.
 Solution: I used AWS Certificate Manager (ACM) to manage the SSL certificates. After validating the domain in Route 53, I reconfigured the load balancer to handle HTTPS traffic and ensured the proper certificate was applied.
-Conclusion
-This project demonstrates how to leverage AWS services to build a robust, secure, and scalable environment for hosting dynamic websites. The use of EC2 instances, VPC, Load Balancers, Auto Scaling, and Route 53 ensures that the website can handle varying levels of traffic while maintaining security and high availability.
 
 
