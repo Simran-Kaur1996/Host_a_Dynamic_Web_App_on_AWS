@@ -1,6 +1,7 @@
 # Dynamic Website Hosting on AWS
 Showcase of Cloud Infrastructure, Automation, Scalability, and Security
 This project demonstrates the deployment and hosting of a dynamic website on Amazon Web Services (AWS), utilizing a robust, scalable, and highly available architecture. It highlights key aspects of cloud infrastructure, automation, security, and performance management.
+
 ![Project Diagram](project.png)
 
 # 📦Project Overview
@@ -39,7 +40,20 @@ This project showcases how to build, deploy, and host a dynamic website on AWS. 
 
 # 🏗️ Deployment Instructions
 Follow these steps to set up the project on AWS:
+**1. Clone the Repository**
+Clone this repository to your local machine:
+```bash
+git clone https://github.com/yourusername/aws-dynamic-website.git
+```
+**2. Set Up AWS Resources**
+Follow the repository instructions to configure the necessary AWS resources. Ensure that your AWS credentials are properly set up.
 
+**3. Deploy Website Code to S3**
+Upload the website files to an S3 bucket:
+
+```bash
+aws s3 sync ./website-code/ s3://your-s3-bucket-name/
+```
 
 ## How It Works:
 - EC2 Instances: Host the dynamic website within private subnets, ensuring high availability and security.
@@ -47,7 +61,7 @@ Follow these steps to set up the project on AWS:
 - Auto Scaling Group: Automatically adjusts the number of EC2 instances in response to traffic demand, ensuring consistent performance.
 - RDS Database: Manages application data with secure access controlled by IAM roles.
 - CloudWatch & SNS: Provides monitoring and notifications for system performance and potential issues.
-- 
+  
 # Key Features
 -Scalability: Automatically scales EC2 instances based on traffic.
 -Fault Tolerance: Deploys across multiple availability zones for improved availability.
@@ -60,8 +74,10 @@ Follow these steps to set up the project on AWS:
 -Advanced Monitoring: Implement CloudWatch Alarms for proactive monitoring and automated remediation.
 
 # Troubleshooting & Solutions
+
 **Problem 1: Unable to connect to EC2 instances**
 -Solution: Verify that the Security Group allows inbound traffic on the necessary ports (80 for HTTP, 443 for HTTPS) and that the correct key pair is used for SSH access.
+
 **Problem 2: Auto Scaling not working as expected**
 -Solution: Check the Auto Scaling Group settings, ensuring the desired capacity, minimum, and maximum instances are properly configured. Also, ensure the ALB is properly registered with the target group.
 
