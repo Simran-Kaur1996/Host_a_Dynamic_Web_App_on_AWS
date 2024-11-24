@@ -1,14 +1,6 @@
 AWS Dynamic Website Hosting with DevOps Practices
 This project demonstrates the deployment and hosting of a dynamic website on AWS, utilizing various AWS services to ensure high availability, scalability, security, and fault tolerance. The infrastructure includes a combination of EC2, VPC, load balancing, auto-scaling, and monitoring services to provide a robust and scalable web hosting environment.
 
-Table of Contents
-Architecture Overview
-Deployment Instructions
-Prerequisites
-Steps
-Challenges Faced and Solutions
-Conclusion
-Repository Contents
 Architecture Overview
 The website is hosted on EC2 instances within a Virtual Private Cloud (VPC) configured with both public and private subnets across two Availability Zones. The infrastructure utilizes the following AWS resources:
 
@@ -40,7 +32,7 @@ bash
 Copy code
 git clone <repository_url>
 cd <repository_directory>
-Set Up the Required AWS Resources: Follow the instructions in the repository’s documentation to set up the AWS resources, including the VPC, subnets, EC2 instances, Auto Scaling Group, and Load Balancer.
+Set Up the Required AWS Resources: Follow the instructions in the repository’s documentation to set up the AWS resources. This includes creating the VPC, subnets, EC2 instances, Auto Scaling Group, and configuring the Load Balancer.
 
 Deploy Website Code to S3: Store your application code and assets in an S3 bucket. The application files will be synced with EC2 instances from this bucket.
 
@@ -97,26 +89,22 @@ bash
 Copy code
 aws route53 change-resource-record-sets --hosted-zone-id <zone_id> --change-batch file://dns_config.json
 Challenges Faced and Solutions
-1. EC2 Instances in Private Subnets Not Accessible for Web Traffic
-Issue: EC2 instances deployed in private subnets couldn’t receive web traffic because the load balancer was not correctly routing traffic.
-Solution: I configured the Application Load Balancer to route traffic to EC2 instances in private subnets and ensured that the NAT Gateway in the public subnet allowed EC2 instances to access the internet.
-2. Insufficient Database Connections
-Issue: The MySQL database hosted on RDS experienced connection issues due to excessive concurrent requests.
-Solution: Increased the max_connections parameter in MySQL and optimized queries to handle higher load. I also used Auto Scaling for EC2 instances to balance the web traffic.
-3. Incorrect Permissions for S3 Bucket
-Issue: EC2 instances failed to access application files stored in S3 due to restrictive bucket permissions.
-Solution: Modified the S3 Bucket Policy to allow EC2 instances access by creating an appropriate IAM Role with S3 read permissions.
-4. Application Not Available After Deployment
-Issue: The website was inaccessible after deploying code due to missing dependencies and misconfigurations.
-Solution: Created a script to automatically install necessary software (Apache, PHP, MySQL) and ensure the EC2 instance was correctly configured to serve the website.
-5. SSL Certificate Installation Failures
-Issue: SSL/TLS certificates failed to install properly for HTTPS communication.
-Solution: Used AWS Certificate Manager (ACM) to manage and validate SSL certificates. Configured the Load Balancer to handle HTTPS traffic and applied the correct certificate.
+1. Challenge: EC2 Instances in Private Subnets Not Accessible for Web Traffic
+Issue: I deployed EC2 instances in private subnets for enhanced security, but they couldn't receive web traffic because the load balancer was not correctly routing the traffic to the instances in the private subnet.
+Solution: I configured the Application Load Balancer to route traffic to EC2 instances within the private subnet. Additionally, I placed the NAT Gateway in a public subnet to ensure EC2 instances in the private subnet could access the internet for updates.
+2. Challenge: Insufficient Database Connections
+Issue: The MySQL database hosted on RDS was experiencing connection issues due to excessive concurrent requests.
+Solution: I increased the max_connections parameter in MySQL and optimized queries to handle a higher load. Additionally, I implemented an Auto Scaling Group for EC2 instances to handle increased web traffic efficiently, thereby reducing the load on the database.
+3. Challenge: Incorrect Permissions for S3 Bucket
+Issue: During deployment, the EC2 instances failed to access the application files stored in S3 due to restrictive permissions on the bucket.
+Solution: I modified the S3 Bucket Policy to allow EC2 instances to access the files by creating an appropriate IAM Role with S3 read permissions and attaching it to the EC2 instances.
+4. Challenge: Application Not Available After Deployment
+Issue: After deploying the website code to EC2 instances, the site was not accessible due to missing dependencies and incorrect configurations in the EC2 instances.
+Solution: I created a script to automatically install necessary software (Apache, PHP, MySQL) and configure the EC2 instance to serve the website. I also ensured the security groups allowed HTTP/HTTPS traffic on port 80 and 443.
+5. Challenge: SSL Certificate Installation Failures
+Issue: There were issues with installing and configuring the SSL/TLS certificates for secure HTTPS communication.
+Solution: I used AWS Certificate Manager (ACM) to manage the SSL certificates. After validating the domain in Route 53, I reconfigured the load balancer to handle HTTPS traffic and ensured the proper certificate was applied.
 Conclusion
-This project showcases how to leverage AWS services for hosting a scalable, high-availability dynamic website. By using services like EC2, VPC, Auto Scaling, and Route 53, this setup ensures the website can handle varying levels of traffic while maintaining security and uptime.
+This project demonstrates how to leverage AWS services to build a robust, secure, and scalable environment for hosting dynamic websites. The use of EC2 instances, VPC, Load Balancers, Auto Scaling, and Route 53 ensures that the website can handle varying levels of traffic while maintaining security and high availability.
 
-Repository Contents
-Reference Diagram: Visual representation of the AWS infrastructure.
-Deployment Scripts: Scripts to provision and configure AWS resources.
-SQL Migration Script: Flyway script to migrate the database schema to an RDS instance.
-Web Hosting Scripts: Scripts to install and configure the web server and application on EC2 instances.
+
