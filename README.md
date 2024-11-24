@@ -29,14 +29,14 @@ This project showcases how to build, deploy, and host a dynamic website on AWS. 
 - **RDS** for database management
 
 # 🔧 Technologies Used
--**AWS EC2**: For hosting the web application.
--**AWS VPC**: For creating a secure and isolated network.
--**AWS Auto** Scaling: For automatic scaling of EC2 instances.
--**AWS Application Load Balancer**: For distributing traffic across instances.
--**AWS RDS**: For database management.
--**AWS S3**: For storing static files.
--**AWS Route 53**: For DNS management.
--**AWS Certificate Manager**: For securing communications via SSL.
+-**AWS EC2**: For hosting the web application
+-**AWS VPC**: For creating a secure and isolated network
+-**AWS Auto** Scaling: For automatic scaling of EC2 instances
+-**AWS Application Load Balancer**: For distributing traffic across instances
+-**AWS RDS**: For database management
+-**AWS S3**: For storing static files
+-**AWS Route 53**: For DNS management
+-**AWS Certificate Manager**: For securing communications via SSL
 
 # 🏗️ Deployment Instructions
 Follow these steps to set up the project on AWS:
